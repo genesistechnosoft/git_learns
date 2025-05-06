@@ -31,7 +31,7 @@ const Introduction = () => {
 
       <h2 className="section-heading">Who Should Use This Documentation?</h2>
       <p className='entro'>
-        This documentation is intended for grocery store administrators, managers, and technical teams responsible for maintaining the admin panel.
+        This documentation intended for grocery store administrators, managers, and technical teams responsible for maintaining the admin panel.
       </p>
 
       <h2 className="section-heading">Getting Started</h2>
