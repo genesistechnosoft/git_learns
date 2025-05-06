@@ -34,7 +34,7 @@ const Introduction = () => {
         This documentation intended for grocery store administrators, managers, and technical teams responsible for maintaining the admin panel.
       </p>
 
-      <h2 className="section-heading">Getting Started</h2>
+      <h2 className="section-heading">Getting Starts</h2>
       <p className='entro'>
         To begin using the Grocery Admin Panel, proceed to the <strong>Installation</strong> section to set up your system.
       </p>
