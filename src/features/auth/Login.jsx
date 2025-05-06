@@ -96,7 +96,7 @@ const LoginPage = () => {
           <div className="ripped-image-wrapper">
             {rippedImage && <img src={rippedImage} alt="Ripped Paper" className="ripped-image" />}
           </div>
-          <p>Everything you need in a single platform</p>
+          <p>Everything you need in a single platform.</p>
         </div>
       </div>
     </div>
