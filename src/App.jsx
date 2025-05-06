@@ -1,8 +1,8 @@
 /* eslint-disable react-refresh/only-export-components */
-import React, { useState, createContext, useContext } from 'react'
+import React, { useState, createContext, useContext, useEffect } from 'react'
 import { ConfigProvider, theme as antdTheme } from 'antd'
 import { BrowserRouter } from 'react-router-dom'
-import { themes } from './theme/theme'
+import { themes, convertThemeToCSS } from './theme/theme'
 import AppRoutes from './routes/AppRoutes'
 
 export const ThemeTokenContext = createContext()
@@ -15,6 +15,11 @@ export const useThemeUpdater = () => useContext(ThemeUpdateContext)
 const App = () => {
     const [mode, setMode] = useState(localStorage.getItem('theme') || 'light')
     const themeTokens = themes[mode].token
+
+    useEffect(() => {
+        const currentTheme = mode === 'dark' ? themes.dark : themes.light;
+        convertThemeToCSS(currentTheme);
+      }, [mode]);
 
     const currentTheme = {
         token: themeTokens,
