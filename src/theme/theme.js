@@ -29,3 +29,10 @@ export const themes = {
     },
   }
   
+
+  export const convertThemeToCSS = (theme) => {
+    const root = document.documentElement;
+    Object.entries(theme.token).forEach(([key, value]) => {
+      root.style.setProperty(`--${key}`, value);
+    });
+  };
