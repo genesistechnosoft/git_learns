@@ -1,30 +1,18 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { Form, Input, Typography, Spin } from 'antd'
-import { useThemeTokens } from '../../App'
+
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import FormInput from './FormInput/FormInput';
+import './Login.css';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginRequest } from './authSlice'
-import { useTranslation } from 'react-i18next'
-import AppButton from '../../components/ui/AppButton'
 
-const { Title } = Typography
-
-const Login = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const { t } = useTranslation()
-  const { loading, isAuthenticated } = useSelector((state) => state.auth)
-  const {
-    colorTextBase,
-    padding,
-    colorBgBase,
-    headerBg,
-  } = useThemeTokens()
-
-  const onFinish = (values) => {
-    dispatch(loginRequest(values))
-  }
+const LoginPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [rippedImage, setRippedImage] = useState('');
+  const navigate = useNavigate(); 
+  const dispatch = useDispatch();
+  const { isAuthenticated } = useSelector((state) => state.auth)
 
   React.useEffect(() => {
     if (isAuthenticated) {
@@ -32,63 +20,87 @@ const Login = () => {
     }
   }, [isAuthenticated])
 
+  useEffect(() => {
+    fetch('/src/data/data.json')
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          const randomIndex = Math.floor(Math.random() * data.length);
+          // Add a cache-busting query param
+          const imgUrl = data[randomIndex] + '?cb=' + Date.now();
+          console.log("imgUrl", imgUrl);
+          setRippedImage(imgUrl);
+        }
+      })
+      .catch((err) => console.error('Error loading logos.json:', err));  
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(loginRequest())
+    console.log('Login with', { email, password });
+    navigate('/');
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'email') setEmail(value);
+    if (name === 'password') setPassword(value);
+  };
+
   return (
-    <div
-      style={{
-        display: 'flex',
-        height: '100vh',
-        justifyContent: 'center',
-        alignItems: 'center',
-        background: colorBgBase,
-        padding,
-      }}
-    >
-      <div
-        style={{
-          width: '100%',
-          maxWidth: '400px',
-          padding,
-          background: headerBg,
-          borderRadius: 8,
-        }}
-      >
-        <Title level={3} style={{ color: colorTextBase, textAlign: 'center' }}>
-          {t('login.title')}
-        </Title>
-        <Form
-          layout="vertical"
-          autoComplete="off"
-        >
-          <Form.Item
-            name="username"
-            label={t('login.username')}
-            rules={[{ required: true, message: t('login.required', { field: t('login.username') }) }]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
+    <div className="login-container">
+      <div className="login-left">
+        <div className="logo-text">
+          <img src="/src/assets/images/icon-aquarius.png" alt="Company Logo" className="company-logo" />
+        </div>
+        <form className="login-form" onSubmit={handleSubmit}>
+          <FormInput
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            required
+            value={email}
+            onChange={handleInputChange}
+          />
+          <FormInput
+            type="password"
             name="password"
-            label={t('login.password')}
-            rules={[{ required: true, message: t('login.required', { field: t('login.password') }) }]}
-          >
-            <Input.Password />
-          </Form.Item>
+            placeholder="Password"
+            required
+            value={password}
+            onChange={handleInputChange}
+          />
+          <div className="login-options">
+            <label>
+              <input type="checkbox" /> Keep me logged in on this computer
+            </label>
+          </div>
+          <button type="submit" className="primary-button">Login</button>
 
-          <Form.Item>
-            <AppButton
-              type='primary'
-              block
-              onClick={onFinish}
-              disabled={loading}
-            >
-              {loading ? <Spin size="small" /> : 'Login'}
-            </AppButton>
-          </Form.Item>
-        </Form>
+          <Link to="/forgot-password" className="forgot-link">
+            I forgot my password
+          </Link>
+
+          <Link to="/register">
+            <button type="button" className="secondary-button">Register</button>
+          </Link>
+        </form>
+      </div>
+
+      <div className="login-right">
+        <div className="right-content">
+        <h1>We've Rebranded</h1>
+          <p>Community Living Made Easy</p>
+          <button className="learn-more-button">Learn More</button>
+          <div className="ripped-image-wrapper">
+            {rippedImage && <img src={rippedImage} alt="Ripped Paper" className="ripped-image" />}
+          </div>
+          <p>Everything you need in a single platform</p>
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default LoginPage;
