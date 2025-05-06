@@ -1,0 +1,43 @@
+.form-input-container {
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e8f0e8;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+  }
+  
+  .form-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(139, 0, 0, 0.3);
+    background-color: #f0f5f0;
+  }
+  
+  .form-input::placeholder {
+    color: #aaa;
+    transition: color 0.3s ease;
+  }
+  
+  .form-input:focus::placeholder {
+    color: #ccc;
+  }
+  
+  .form-input[data-focused="true"] {
+    background-color: #f0f5f0;
+  }
+  
+  /* Validation styles can be added here */
+  .form-input:invalid:not(:placeholder-shown) {
+    border: 1px solid #ff3860;
+  }
+  
+  .form-input:valid:not(:placeholder-shown) {
+    border: 1px solid #09c372;
+  }
