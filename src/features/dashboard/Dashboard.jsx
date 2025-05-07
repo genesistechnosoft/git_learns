@@ -1,9 +1,39 @@
 import React from 'react';
+import GroupedDropdown from '../../components/GroupedDropdown';
 
 
 const Introduction = () => {
+
+  const options = [
+    {
+      key: 'staff',
+      label: 'Staff',
+      options: [
+        { value: 'john', label: 'John Doe' },
+        { value: 'jane', label: 'Jane Smith' },
+      ],
+    },
+    {
+      key: 'owners',
+      label: 'Owners',
+      options: [
+        { value: 'bob', label: 'Bob Wilson' },
+        { value: 'alice', label: 'Alice Brown' },
+      ],
+    },
+  ];
+
+  const handleChange = (value) => {
+    console.log('Selected:', value);
+  };
+
   return (
     <div className="introduction-container">
+      <GroupedDropdown
+      options={options}
+      placeholder="Select a person"
+      onChange={handleChange}
+    />
       <h1 className='docu-head'>Grocery Admin Documentation</h1>
       <p className='entro'>
         Welcome to the Grocery Admin Panel documentation! This guide provides an overview of how to manage the grocery store's operations, including product management, order tracking, user management, and more.
