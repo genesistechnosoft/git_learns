@@ -1,0 +1,70 @@
+.grouped-dropdown-container {
+  width: 100%;
+  max-width: 300px;
+}
+
+.grouped-dropdown {
+  width: 100%;
+}
+
+.grouped-dropdown .ant-select-selector {
+  border-radius: 8px !important;
+  border: 1px solid #d9d9d9 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+  transition: all 0.3s ease !important;
+}
+
+.grouped-dropdown:hover .ant-select-selector {
+  border-color: #40a9ff !important;
+  box-shadow: 0 2px 8px rgba(24, 144, 255, 0.15) !important;
+}
+
+.grouped-dropdown-menu {
+  border-radius: 8px !important;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1) !important;
+  padding: 8px 0 !important;
+}
+
+.dropdown-group {
+  padding: 8px 0 !important;
+}
+
+.dropdown-group .ant-select-item-group {
+  color: #8c8c8c !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  padding: 8px 12px !important;
+  margin: 0 !important;
+  background-color: #fafafa !important;
+  border-bottom: 1px solid #f0f0f0 !important;
+}
+
+.dropdown-option {
+  padding: 8px 12px !important;
+  margin: 0 !important;
+  transition: all 0.2s ease !important;
+}
+
+.dropdown-option:hover {
+  background-color: #f5f5f5 !important;
+}
+
+/* Focus styles for accessibility */
+.grouped-dropdown .ant-select-focused .ant-select-selector {
+  border-color: #40a9ff !important;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2) !important;
+}
+
+/* Selected option styles */
+.ant-select-item-option-selected {
+  background-color: #e6f7ff !important;
+  font-weight: 500 !important;
+}
+
+/* Disabled state styles */
+.grouped-dropdown.ant-select-disabled .ant-select-selector {
+  background-color: #f5f5f5 !important;
+  cursor: not-allowed !important;
+} 
